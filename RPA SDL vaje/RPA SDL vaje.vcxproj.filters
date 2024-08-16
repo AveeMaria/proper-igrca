@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Zivalca.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BodyArmor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpeedBoost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Game.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Map.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Zivalca.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BodyArmor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpeedBoost.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\grass.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\sand.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\water.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\corrupted.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\iceberg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\titlescreen.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\menu.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\northern_sand.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\northern_water.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\northern_grass.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\antarctic_grass.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\antarctic_sand.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\antarctic_water.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\whaler.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\pirate.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\whale.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\deathscreen.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\atol.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\body_armor.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\cat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\door.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\enemy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\red.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\tile.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\wall.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\loading.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\speed_boost.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libpng16-16.dll" />
+    <None Include="SDL2.dll" />
+    <None Include="SDL2_image.dll" />
+    <None Include="zlib1.dll" />
+    <None Include="TODO.md" />
+    <None Include="navodila\DODATNE_ZAHTEVE_ZA_IGRICO.docx" />
+    <None Include="navodila\Sea-Shepherd-Rules.docx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="SDL2.lib" />
+    <Library Include="SDL2_image.lib" />
+    <Library Include="SDL2main.lib" />
+    <Library Include="SDL2test.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="navodila\navodiloChatGPT.txt" />
+  </ItemGroup>
+</Project>

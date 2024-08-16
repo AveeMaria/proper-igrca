@@ -1,0 +1,150 @@
+```#include <iostream>
+#include <SDL.h>
+
+using namespace std;
+
+SDL_Window *okno = NULL;
+SDL_Renderer *renderer = NULL;
+bool mousedown = false;
+int Running;
+int mx, my;
+
+struct pravokotnik {
+	float sirina;
+	float visina;
+	float x;
+	float y;
+
+} pravokotnik;
+
+int odpriokno() {
+	
+	
+	if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+		cout << "napaka pri inicalizaciji" << SDL_GetError() << endl;
+		return false;
+	}
+	
+	okno = SDL_CreateWindow("OKNO", 300, 400, 800, 600, 0);
+	if (okno == NULL) {
+		cout << "Napaka pri oknu" << SDL_GetError() << endl;
+		return 0;
+	}
+	
+	renderer = SDL_CreateRenderer(okno, -1, 0);
+	if (renderer == NULL) {
+		cout << "Napaka pri renderju" << SDL_GetError() << endl;
+		return 0;
+	}
+	
+
+
+	return 1;
+}
+
+void setup() {
+	pravokotnik.sirina = 100;
+	pravokotnik.visina = 50;
+	pravokotnik.x = 100;
+	pravokotnik.y = 50;
+
+}
+
+void input() {
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+		switch (event.type) {
+			
+		case SDL_QUIT:
+				Running = false;
+				break;
+			
+			case SDL_KEYDOWN:
+				switch(event.key.keysym.sym){
+					case SDLK_ESCAPE:
+						Running = false;
+						break;
+					case SDLK_w:
+						pravokotnik.y -= 100;
+						cout << "w" << endl;
+						break;
+					case SDLK_s:
+						pravokotnik.y += 100;
+						cout << "s" << endl;
+						break;
+					case SDLK_a:
+						pravokotnik.x -= 100;
+						cout << "a" << endl;
+						break;
+					case SDLK_d:
+						pravokotnik.x += 100;
+						cout << "d" << endl;
+						break;
+				}
+
+			case SDL_MOUSEBUTTONDOWN: 
+				mousedown = true;
+				break;
+			
+
+			case SDL_MOUSEBUTTONUP: 
+				mousedown = false;
+				break;
+			
+		}
+		
+	}
+	
+	SDL_GetMouseState(&mx, &my);
+}
+
+void update() {
+
+}
+
+void render() {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+	
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	if(mousedown == true )
+		SDL_RenderDrawPoint(renderer, mx, my);
+
+	SDL_Rect pravokot = {
+		pravokotnik.x, 
+		pravokotnik.y,
+		pravokotnik.sirina,
+		pravokotnik.visina,
+	};
+
+	SDL_RenderFillRect(renderer, &pravokot);
+
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderPresent(renderer);
+
+}
+
+void destroy_window() {
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(okno);
+	SDL_Quit();
+}
+
+int main(int argc, char* argv[]) {
+	
+	Running = odpriokno();
+	
+	setup();
+	
+	while (Running == 1) {
+		input();
+		render();
+		update();
+	}
+	
+	destroy_window();
+	
+
+
+	return 0;
+}```
