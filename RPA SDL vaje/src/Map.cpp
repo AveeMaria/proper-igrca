@@ -128,7 +128,7 @@ void Map::wallMarker(int map[20][30])
 }
 
 //kle se playerrect posle kot "e"
-bool Map::landColision(SDL_Rect e)
+bool Map::landCollision(SDL_Rect e)
 {
     //prever collision z usemi zidovi   
 

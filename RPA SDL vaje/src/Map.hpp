@@ -15,7 +15,7 @@ public:
     void wallMarker(int map[20][30]);
 
     //prever collision nekga entityja
-    bool landColision(SDL_Rect e);
+    bool landCollision(SDL_Rect e);
 
     void highLightWalls();
        
@@ -28,7 +28,7 @@ private:
     SDL_Texture* exit;
 
     std::vector<SDL_Rect> zidovi;
-
+    std::vector<SDL_Rect> takenSpawns;
 
     int map[20][30];
 };

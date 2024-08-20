@@ -5,8 +5,10 @@
 
 class Entity {
 protected:
-	int xpos=0;
-	int ypos=0;
+	int xpos = 0;
+	int ypos = 0;
+
+	bool visible = true;
 
 	SDL_Texture* objTexture;
 
@@ -29,9 +31,14 @@ public:
 	//ce spremenis destrect spremenis tud xpos&ypos da ga update() ne unic
 	void setDestRect(SDL_Rect rect) { destRect = rect; xpos = rect.x; ypos = rect.y; }
 
+	void setVisible(bool s) { visible = s; }
+
+	bool getVisible() { return visible; }
+
+
 	virtual void setXY(int, int);
 
-	void Update();
-	void Render();
-	bool rectCollision(SDL_Rect rect);
+	virtual void Update();
+	virtual void Render();
+	bool rectCollision(SDL_Rect);
 };

@@ -8,11 +8,14 @@ Entity::Entity(const char* texturesheet, int x, int y)
     ypos = y;
 }
 
+
 //does nothing
 Entity::~Entity() 
 {
     SDL_DestroyTexture(objTexture);
 }
+
+//zracuna dolzino
 float Entity::distance(int X, int Y)
 {
     int dx = X - xpos;
@@ -40,6 +43,7 @@ void Entity::Update()
 
 void Entity::Render()
 {
+    if (!visible) { return; }
     SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
 }
 

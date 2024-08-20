@@ -7,10 +7,13 @@
 #include "Zivalca.hpp"
 #include "BodyArmor.hpp"
 #include "SpeedBoost.hpp"
+#include "Inventory.hpp"
+#include "HurtCam.hpp"
 
 Player* player;
+Inventory* inventory;
+HurtCam* hurtcam;
 
-Enemy* enemy;
 
 BodyArmor* bodyarmor;
 
@@ -56,7 +59,12 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	map = new Map();
     bodyarmor = new BodyArmor();
     bodyarmor->setDestRect(map->validSpawn());
-        
+    
+    hurtcam = new HurtCam();
+    hurtcam->setVisible(false);
+
+    inventory = new Inventory();
+
     bodyarmor->Update();
 
     spawnSpeedBoosts(2);
@@ -95,6 +103,26 @@ void Game::handleEvents() {
         isRunning = false;
     }
 
+    if (currentKeyStates[SDL_SCANCODE_E]) {
+        //inventory
+        inventory->toggleInventory();
+        if (inventory->showInventory()) {
+            paused = true;
+        }
+        else {
+            paused = false;
+        }
+    }
+
+    if (inventory->showInventory()) {
+
+        inventory->Render(); 
+        update();
+        render();
+        
+        return;
+    }
+
     if (currentKeyStates[SDL_SCANCODE_W]) {
         player->gor(map);
     }
@@ -111,10 +139,6 @@ void Game::handleEvents() {
         player->desno(map);
     }
 
-    if (currentKeyStates[SDL_SCANCODE_E]) {
-        //inventory
-    }
-
     if (currentKeyStates[SDL_SCANCODE_X]) {
         player->KYS();//samomor
     }
@@ -126,12 +150,21 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-	player->Update();
+    if (inventory->showInventory()) {
+        inventory->Update();
+        return;
+    }
+    if (!player->alive()) {
+        isRunning = false;
+    }
+
+    player->Update();
 
     if (!player->checkArmor()) {
-        if (bodyarmor->rectCollision(player->GetPlayerRect())) {
+        if (bodyarmor->rectCollision(player->GetPlayerRect()) && !bodyarmor->getUsed()) {
             player->getArmor(bodyarmor->getDefensePoints());
-            //std::cout << "dubu armor!\n";
+            bodyarmor->setSetUsed(true);
+            std::cout << "dubu armor!\n";
         }
     }
     else {
@@ -139,13 +172,40 @@ void Game::update() {
             //bodyarmor->setDestRect(player->getDestRect()); // mnj efficient
             bodyarmor->setXY(player->getX(), player->getY());
             bodyarmor->Update();
-        
+
             //std::cout << "mam armor!\n";
         }
     }
-   
+    
+    if(player->getHP() <= 100 && bodyarmor->getUsed()) {
+        bodyarmor->changeToBrokenTexture();
+    }
+
+    {
+    bool noCollision = true;
     for (Enemy* e : enemies) {
+        e->moveToCoordinate(player->getX(), player->getY(), map);
         e->Update();
+        
+
+        if (e->rectCollision(player->getDestRect())) {
+            //std::cout << "collided\n";
+            ///neki ne dela kle
+            player->takeDamage(/*e->doDamage()*/1);
+            hurtcam->setVisible(true);
+            noCollision = false;
+        }
+
+
+        hurtcam->Update();
+
+        //e->moveTowardsPlayer(player->getX(), player->getY(), map);
+
+    }
+
+    if (noCollision) {
+        hurtcam->setVisible(false);
+    }
     }
 
     // sam z iteratorjem loh brises stvari (z foreach nemores)
@@ -156,7 +216,6 @@ void Game::update() {
         if (z->rectCollision(player->getDestRect())) {
 
             if (player->howManyCat() < 2) {
-                //std::cout << "mjav!!!\n";
 
                 player->addCat();
 
@@ -187,13 +246,18 @@ void Game::update() {
     for (SpeedBoost* s : speedboosts) {
         s->Update();
     }
+
+    
 }
 
 void Game::render() {
-	++cnt;
-	//std::cout << cnt << "\n";
-
 	SDL_RenderClear(renderer);
+
+    if (inventory->showInventory()) {
+        inventory->Render();
+        SDL_RenderPresent(renderer);
+        return;
+    }
 
 	map->DrawMap();
     map->highLightWalls();
@@ -213,6 +277,11 @@ void Game::render() {
     
     player->Render();
     bodyarmor->Render();
+    
+
+    if (hurtcam->getVisible()) {
+        hurtcam->Render();
+    }
 
 	SDL_RenderPresent(renderer);
 }

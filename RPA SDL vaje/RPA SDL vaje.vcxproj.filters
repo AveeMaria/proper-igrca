@@ -45,6 +45,12 @@
     <ClCompile Include="src\SpeedBoost.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Inventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HurtCam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.hpp">
@@ -72,6 +78,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\SpeedBoost.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Inventory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HurtCam.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -164,6 +176,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="ass\speed_boost.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\inventory.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\hurtcam.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

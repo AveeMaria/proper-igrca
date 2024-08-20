@@ -23,6 +23,8 @@
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\HurtCam.cpp" />
+    <ClCompile Include="src\Inventory.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -35,6 +37,8 @@
     <ClInclude Include="src\Entity.hpp" />
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\Enemy.hpp" />
+    <ClInclude Include="src\HurtCam.hpp" />
+    <ClInclude Include="src\Inventory.hpp" />
     <ClInclude Include="src\Map.hpp" />
     <ClInclude Include="src\Player.hpp" />
     <ClInclude Include="src\SpeedBoost.hpp" />
@@ -66,6 +70,8 @@
     <Image Include="ass\cat.png" />
     <Image Include="ass\door.png" />
     <Image Include="ass\enemy.png" />
+    <Image Include="ass\hurtcam.png" />
+    <Image Include="ass\inventory.png" />
     <Image Include="ass\loading.png" />
     <Image Include="ass\player.png" />
     <Image Include="ass\red.png" />

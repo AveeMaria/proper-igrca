@@ -9,7 +9,6 @@ class Player:public Entity
 private:
 	int hp = 100;
 
-
 	bool catSlot1 = false;
 	bool catSlot2 = false;
 
@@ -30,8 +29,6 @@ public:
 	Player(const char* texturesheet, int x, int y);
 	Player() {}
 
-
-
 	void dol(Map* m) {
 		//ce je stopu, zdej nebo pa bo drugic
 		if (stepped) {
@@ -41,7 +38,7 @@ public:
 
 		SDL_Rect fRect = destRect;
 		fRect.y += speed;
-		if (m->landColision(fRect)) {
+		if (m->landCollision(fRect)) {
 			//nc nardi
 		}
 		else {
@@ -60,7 +57,7 @@ public:
 
 		SDL_Rect fRect = destRect;
 		fRect.y -= speed;
-		if (m->landColision(fRect)) {
+		if (m->landCollision(fRect)) {
 			//nc nardi
 		}
 		else {
@@ -79,7 +76,7 @@ public:
 
 		SDL_Rect fRect = destRect;
 		fRect.x -= speed;
-		if (m->landColision(fRect)) {
+		if (m->landCollision(fRect)) {
 
 		}
 		else {
@@ -97,7 +94,7 @@ public:
 
 		SDL_Rect fRect = destRect;
 		fRect.x += speed;
-		if (m->landColision(fRect)) {
+		if (m->landCollision(fRect)) {
 
 		}
 		else {
@@ -156,11 +153,10 @@ public:
 
 	void SetHealth(int h) { hp = h; }
 
+	void takeDamage(int dmg) { hp -= dmg; }
+
 	//prever ce si crknu
 	bool alive() {return hp > 0;}
-
-		
-
 
 
 	//se ubije
@@ -173,7 +169,6 @@ public:
 	void ToggleImmortalMode() { immortalMode = !immortalMode; }
 
 	bool getSui() { return sui; }
-
 
 	SDL_Rect GetPlayerRect() { return destRect; }
 };

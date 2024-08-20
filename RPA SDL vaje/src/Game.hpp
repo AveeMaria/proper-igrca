@@ -19,6 +19,9 @@ public:
 
 	void init(const char* title, int width, int height, bool fullscreen);
 
+	bool isPaused() { return paused; }
+
+
 	void handleEvents();
 	void update();
 	void render();
@@ -42,6 +45,8 @@ public:
 private:
 
 	bool isRunning = false;
+	bool paused = false;
+
 	uint32_t cnt = 0;
 	SDL_Window* window;
 };
