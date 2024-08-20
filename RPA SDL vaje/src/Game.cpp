@@ -9,7 +9,19 @@
 #include "SpeedBoost.hpp"
 #include "Inventory.hpp"
 #include "HurtCam.hpp"
+#include "SerialPort.hpp"
 
+
+
+
+SerialPort serial("COM3", CBR_9600);
+
+//char c = serial.readByte();
+/*
+if (c != '\0') {
+    std::cout << c;
+}*/
+    
 Player* player;
 Inventory* inventory;
 HurtCam* hurtcam;
@@ -96,9 +108,86 @@ void Game::handleEvents() {
             break;
         }
     }
+    /*
+    std::cout<<serial.readLine();
+    */
+    // Read and process serial data
+    std::string serialData = serial.readLine();
+    std::istringstream stream(serialData);
+
+    int xValue = 0, yValue = 0;
+    bool buttonPressed = false;
+    std::string token;
+
+    try {
+        if (std::getline(stream, token, ';')) {
+            xValue = std::stoi(token);
+            xValue /= 10;
+        }
+
+        if (std::getline(stream, token, ';')) {
+            yValue = std::stoi(token);
+            yValue /= 10;
+        }
+
+        if (std::getline(stream, token, ';')) {
+            buttonPressed = token == "1";
+        }
+
+        //std::cout << "X: " << xValue << ", Y: " << yValue << ", Button: " << (buttonPressed ? "0\n" : "1\n");
+        
+
+        if (xValue < 40 && xValue > 20) {
+            //std::cout << "levo\n";
+            player->levo(map);
+        }
+        else if (xValue <= 20) {
+            //std::cout << "2levo\n";
+            //player->levo(map);
+            player->levo(map);
+        }
+        
+        if (xValue > 60 && xValue < 80) {
+            //std::cout << "desno\n";
+            player->desno(map);
+        }
+        else if (xValue >= 80) {
+            //std::cout << "2desno\n";
+            //player->desno(map);
+            player->desno(map);
+        }
+
+
+        if (yValue < 40 && yValue > 20) {
+            //std::cout << "gor\n";
+            player->gor(map);
+        }
+        else if (yValue <= 20) {
+            //std::cout << "2gor\n";
+            //player->gor(map);
+            player->gor(map);
+        }
+
+        if (yValue > 60 && yValue < 80) {
+            //std::cout << "2dol\n";
+            player->dol(map);
+        }
+        else if (yValue >= 80) {
+            //std::cout << "dol\n";
+            //player->dol(map);
+            player->dol(map);
+        }
+
+
+    }
+    catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid argument: " << e.what() << '\n';
+    }
+    catch (const std::out_of_range& e) {
+        std::cerr << "Out of range: " << e.what() << '\n';
+    }
 
     const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-
     if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
         isRunning = false;
     }
@@ -142,9 +231,13 @@ void Game::handleEvents() {
     if (currentKeyStates[SDL_SCANCODE_X]) {
         player->KYS();//samomor
     }
+    /*
+    if (currentKeyStates[SDL_SCANCODE_I]) {
+        player->setHealth(2147483647);
+    }*/
 
     //player info
-    if (currentKeyStates[SDL_SCANCODE_I]) {
+    if (currentKeyStates[SDL_SCANCODE_F3]) {
         player->printPlayerInfo();
     }
 }

@@ -9,6 +9,8 @@
 #include <string>
 #include <cstring>
 #include <cmath>
+#include <iostream>
+#include <sstream>  // For std::istringstream
 
 
 class Game

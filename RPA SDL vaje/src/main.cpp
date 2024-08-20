@@ -15,7 +15,6 @@ int main(int argc, char* argv[])
 	game = new Game();
 	game->init("okncek", 960, 640, false);
 
-
 	while (game->running())
 	{
 		frameStart = SDL_GetTicks();

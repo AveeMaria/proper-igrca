@@ -7,7 +7,7 @@
 class Player:public Entity
 {
 private:
-	int hp = 100;
+	int hp = 200;
 
 	bool catSlot1 = false;
 	bool catSlot2 = false;
@@ -151,7 +151,7 @@ public:
 	//health fore
 	int getHP() { return hp; }
 
-	void SetHealth(int h) { hp = h; }
+	void setHealth(int h) { hp = h; }
 
 	void takeDamage(int dmg) { hp -= dmg; }
 

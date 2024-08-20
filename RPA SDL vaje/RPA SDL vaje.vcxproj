@@ -28,6 +28,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\SerialPort.cpp" />
     <ClCompile Include="src\SpeedBoost.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\Zivalca.cpp" />
@@ -39,6 +40,7 @@
     <ClInclude Include="src\Enemy.hpp" />
     <ClInclude Include="src\HurtCam.hpp" />
     <ClInclude Include="src\Inventory.hpp" />
+    <ClInclude Include="src\SerialPort.hpp" />
     <ClInclude Include="src\Map.hpp" />
     <ClInclude Include="src\Player.hpp" />
     <ClInclude Include="src\SpeedBoost.hpp" />
