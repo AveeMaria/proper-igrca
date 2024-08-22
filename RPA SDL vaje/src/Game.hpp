@@ -45,7 +45,7 @@ public:
 
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 private:
-
+	bool joystickmode = false;
 	bool isRunning = false;
 	bool paused = false;
 

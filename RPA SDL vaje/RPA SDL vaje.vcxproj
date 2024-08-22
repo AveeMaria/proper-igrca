@@ -27,6 +27,7 @@
     <ClCompile Include="src\Inventory.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\Projectile.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\SerialPort.cpp" />
     <ClCompile Include="src\SpeedBoost.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="src\Enemy.hpp" />
     <ClInclude Include="src\HurtCam.hpp" />
     <ClInclude Include="src\Inventory.hpp" />
+    <ClInclude Include="src\Projectile.hpp" />
     <ClInclude Include="src\SerialPort.hpp" />
     <ClInclude Include="src\Map.hpp" />
     <ClInclude Include="src\Player.hpp" />
@@ -69,6 +71,7 @@
     <Image Include="assets\whaler.png" />
     <Image Include="assets\x.png" />
     <Image Include="ass\body_armor.png" />
+    <Image Include="ass\body_armor_broken.png" />
     <Image Include="ass\cat.png" />
     <Image Include="ass\door.png" />
     <Image Include="ass\enemy.png" />

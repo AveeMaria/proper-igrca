@@ -54,6 +54,9 @@
     <ClCompile Include="src\SerialPort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Projectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.hpp">
@@ -90,6 +93,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\SerialPort.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Projectile.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -188,6 +194,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="ass\hurtcam.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ass\body_armor_broken.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

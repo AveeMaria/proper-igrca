@@ -3,11 +3,12 @@
 #include "Game.hpp"
 #include "Entity.hpp"
 #include "Map.hpp"
+#include "Projectile.hpp"
 
-class Player:public Entity
+class Player: public Entity
 {
 private:
-	int hp = 200;
+	int hp = 100;
 
 	bool catSlot1 = false;
 	bool catSlot2 = false;
@@ -19,7 +20,7 @@ private:
 	bool stepped = false;
 
 	int score = 0;
-	
+
 	//bool ReplayOn = false;
 	bool immortalMode = false;
 
@@ -27,7 +28,7 @@ private:
 
 public:
 	Player(const char* texturesheet, int x, int y);
-	Player() {}
+	Player() {  }
 
 	void dol(Map* m) {
 		//ce je stopu, zdej nebo pa bo drugic
@@ -47,7 +48,7 @@ public:
 		}
 	}
 
-	
+
 	void gor(Map* m) {
 		//ce je stopu, zdej nebo pa bo drugic
 		if (stepped) {
@@ -105,10 +106,10 @@ public:
 
 
 	void printPlayerInfo();
-	
+
 	//armor fore
 
-	bool checkArmor() { 
+	bool checkArmor() {
 		if (hp <= 100) {
 			armorSlot = false;
 		}
@@ -133,7 +134,7 @@ public:
 
 	//speed fore
 	void setSpeed(int s) { speed = s; }
-	
+
 	void getSpeed(int amount) { speed += amount; }
 
 	//to x korakih neha speed aplyat
@@ -156,7 +157,7 @@ public:
 	void takeDamage(int dmg) { hp -= dmg; }
 
 	//prever ce si crknu
-	bool alive() {return hp > 0;}
+	bool alive() { return hp > 0; }
 
 
 	//se ubije

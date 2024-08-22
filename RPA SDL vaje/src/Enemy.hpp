@@ -6,6 +6,7 @@
 
 class Enemy: public Entity {
 private:
+
 	int hp = 100;
 	
 	int dmg = 2;

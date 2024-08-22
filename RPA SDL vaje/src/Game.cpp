@@ -10,24 +10,21 @@
 #include "Inventory.hpp"
 #include "HurtCam.hpp"
 #include "SerialPort.hpp"
-
+#include "Projectile.hpp"
 
 
 
 SerialPort serial("COM3", CBR_9600);
 
-//char c = serial.readByte();
-/*
-if (c != '\0') {
-    std::cout << c;
-}*/
-    
 Player* player;
 Inventory* inventory;
 HurtCam* hurtcam;
 
 
+
 BodyArmor* bodyarmor;
+
+std::vector<Projectile*> projectiles;
 
 std::vector<Zivalca*> zivalce;
 
@@ -38,6 +35,7 @@ std::vector<SpeedBoost*> speedboosts;
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
+int Entity::entityCount = 0;
 
 Game::Game()
 {}
@@ -101,6 +99,9 @@ void Game::handleEvents() {
                 int mouseX, mouseY;
                 SDL_GetMouseState(&mouseX, &mouseY);
                 std::cout << "klik na: [" << mouseX << ", " << mouseY << "]\n";
+                Projectile* p = new Projectile(player->getX(), player->getY(), mouseX, mouseX);
+                projectiles.push_back(p);
+                //projman->spawnProjectile(player->getX(), player->getY(), mouseX, mouseX);
             }
             break;
 
@@ -108,85 +109,87 @@ void Game::handleEvents() {
             break;
         }
     }
-    /*
-    std::cout<<serial.readLine();
-    */
-    // Read and process serial data
-    std::string serialData = serial.readLine();
-    std::istringstream stream(serialData);
-
-    int xValue = 0, yValue = 0;
-    bool buttonPressed = false;
-    std::string token;
-
-    try {
-        if (std::getline(stream, token, ';')) {
-            xValue = std::stoi(token);
-            xValue /= 10;
-        }
-
-        if (std::getline(stream, token, ';')) {
-            yValue = std::stoi(token);
-            yValue /= 10;
-        }
-
-        if (std::getline(stream, token, ';')) {
-            buttonPressed = token == "1";
-        }
-
-        //std::cout << "X: " << xValue << ", Y: " << yValue << ", Button: " << (buttonPressed ? "0\n" : "1\n");
-        
-
-        if (xValue < 40 && xValue > 20) {
-            //std::cout << "levo\n";
-            player->levo(map);
-        }
-        else if (xValue <= 20) {
-            //std::cout << "2levo\n";
-            //player->levo(map);
-            player->levo(map);
-        }
-        
-        if (xValue > 60 && xValue < 80) {
-            //std::cout << "desno\n";
-            player->desno(map);
-        }
-        else if (xValue >= 80) {
-            //std::cout << "2desno\n";
-            //player->desno(map);
-            player->desno(map);
-        }
 
 
-        if (yValue < 40 && yValue > 20) {
-            //std::cout << "gor\n";
-            player->gor(map);
-        }
-        else if (yValue <= 20) {
-            //std::cout << "2gor\n";
-            //player->gor(map);
-            player->gor(map);
-        }
+    //joystick movement
+    if (joystickmode) {
+        std::string serialData = serial.readLine();
+        std::istringstream stream(serialData);
 
-        if (yValue > 60 && yValue < 80) {
-            //std::cout << "2dol\n";
-            player->dol(map);
-        }
-        else if (yValue >= 80) {
-            //std::cout << "dol\n";
-            //player->dol(map);
-            player->dol(map);
-        }
+        int xValue = 0, yValue = 0;
+        bool buttonPressed = false;
+        std::string token;
+
+        try {
+            if (std::getline(stream, token, ';')) {
+                xValue = std::stoi(token);
+                xValue /= 10;
+            }
+
+            if (std::getline(stream, token, ';')) {
+                yValue = std::stoi(token);
+                yValue /= 10;
+            }
+
+            if (std::getline(stream, token, ';')) {
+                buttonPressed = token == "1";
+            }
+
+            //std::cout << "X: " << xValue << ", Y: " << yValue << ", Button: " << (buttonPressed ? "0\n" : "1\n");
 
 
+            if (xValue < 40 && xValue > 20) {
+                //std::cout << "levo\n";
+                player->levo(map);
+            }
+            else if (xValue <= 20) {
+                //std::cout << "2levo\n";
+                //player->levo(map);
+                player->levo(map);
+            }
+
+            if (xValue > 60 && xValue < 80) {
+                //std::cout << "desno\n";
+                player->desno(map);
+            }
+            else if (xValue >= 80) {
+                //std::cout << "2desno\n";
+                //player->desno(map);
+                player->desno(map);
+            }
+
+
+            if (yValue < 40 && yValue > 20) {
+                //std::cout << "gor\n";
+                player->gor(map);
+            }
+            else if (yValue <= 20) {
+                //std::cout << "2gor\n";
+                //player->gor(map);
+                player->gor(map);
+            }
+
+            if (yValue > 60 && yValue < 80) {
+                //std::cout << "2dol\n";
+                player->dol(map);
+            }
+            else if (yValue >= 80) {
+                //std::cout << "dol\n";
+                //player->dol(map);
+                player->dol(map);
+            }
+
+        }
+        catch (const std::invalid_argument& e) {
+            std::cerr << "Invalid argument: " << e.what() << '\n';
+        }
+        catch (const std::out_of_range& e) {
+            std::cerr << "Out of range: " << e.what() << '\n';
+        }
     }
-    catch (const std::invalid_argument& e) {
-        std::cerr << "Invalid argument: " << e.what() << '\n';
-    }
-    catch (const std::out_of_range& e) {
-        std::cerr << "Out of range: " << e.what() << '\n';
-    }
 
+
+    //keyboard movement
     const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
     if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
         isRunning = false;
@@ -231,10 +234,15 @@ void Game::handleEvents() {
     if (currentKeyStates[SDL_SCANCODE_X]) {
         player->KYS();//samomor
     }
-    /*
+
+
+    if (currentKeyStates[SDL_SCANCODE_L]) {
+        std::cout << Entity::getEntityCount() << "\n";
+    }
+    
     if (currentKeyStates[SDL_SCANCODE_I]) {
         player->setHealth(2147483647);
-    }*/
+    }
 
     //player info
     if (currentKeyStates[SDL_SCANCODE_F3]) {
@@ -243,6 +251,7 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+
     if (inventory->showInventory()) {
         inventory->Update();
         return;
@@ -252,6 +261,14 @@ void Game::update() {
     }
 
     player->Update();
+   
+    for (Projectile* p : projectiles) {
+        p->moveToTarget(map);
+    }
+    
+    for (Projectile* p : projectiles) {
+        p->Update();
+    }
 
     if (!player->checkArmor()) {
         if (bodyarmor->rectCollision(player->GetPlayerRect()) && !bodyarmor->getUsed()) {
@@ -370,7 +387,10 @@ void Game::render() {
     
     player->Render();
     bodyarmor->Render();
-    
+
+    for (Projectile* p : projectiles) {
+        p->Render();
+    }
 
     if (hurtcam->getVisible()) {
         hurtcam->Render();

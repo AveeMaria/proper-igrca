@@ -6,6 +6,8 @@ Entity::Entity(const char* texturesheet, int x, int y)
     objTexture = TextureManager::LoadTexture(texturesheet);
     xpos = x;
     ypos = y;
+    entityCount++;
+    Update();
 }
 
 
@@ -13,6 +15,7 @@ Entity::Entity(const char* texturesheet, int x, int y)
 Entity::~Entity() 
 {
     SDL_DestroyTexture(objTexture);
+    entityCount--;
 }
 
 //zracuna dolzino

@@ -5,8 +5,10 @@
 
 class Entity {
 protected:
-	int xpos = 0;
-	int ypos = 0;
+	static int entityCount;
+
+	int xpos;
+	int ypos;
 
 	bool visible = true;
 
@@ -17,8 +19,15 @@ protected:
 public:
 	static bool showHitboxes;
 	Entity(const char* texturesheet,int x,int y);
-	Entity() {}
+	Entity() {
+		xpos = 0;
+		ypos = 0;
+		entityCount++;
+		Update();
+	}
 	~Entity();
+
+	static int getEntityCount() { return entityCount; }
 
 	float distance(int, int);
 
