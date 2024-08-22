@@ -23,7 +23,7 @@ Projectile::Projectile(int playerX, int playerY, int tX, int tY)
     targetX = tX;
     targetY = tY;
 
-    std::cout << "[projectile] xpos:" << xpos << " ypos: " << ypos << " tx: " << targetX << " ty: " << targetY << "\n";
+    //std::cout << "[projectile] xpos:" << xpos << " ypos: " << ypos << " tx: " << targetX << " ty: " << targetY << "\n";
 
     Update();
 }
@@ -67,31 +67,10 @@ void Projectile::moveToTarget(Map* map)
         xpos = tempX;
         ypos = tempY;
     }
-    //}
-}
-
-
-void Projectile::moveToTarget()
-{
-    // Calculate the direction vector (dx, dy)
-    float dx = targetX - xpos;
-    float dy = targetY - ypos;
-
-    // Calculate the distance to the target
-    float distance = sqrt(dx * dx + dy * dy);
-
-    // Prevent moving if we are close enough to the target
-    if (distance <= 1.0f) {
-        return;
+    else {//ce ZADANE zid
+        hitSomething();
     }
-
-    // Normalize the direction vector
-    float dxNormalized = dx / distance;
-    float dyNormalized = dy / distance;
-
-    // Move the projectile towards the target
-    xpos += dxNormalized * speed;
-    ypos += dyNormalized * speed;
+    //}
 }
 
 void Projectile::Update()
@@ -111,9 +90,8 @@ void Projectile::Update()
 void Projectile::Render()
 {
     if (!visible) { return; }
-    SDL_RenderDrawLine(Game::renderer, xpos + 16, ypos + 16 , targetX, targetY);
+    if (showTrajectory) {
+        SDL_RenderDrawLine(Game::renderer, xpos + 16, ypos + 16, targetX, targetY);
+    }
     SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
 }
-
-
-

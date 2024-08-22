@@ -47,13 +47,6 @@ void Enemy::moveTowardsPlayer(float PlayerPosX, float PlayerPosY, Map* map) {
 }
 */
 void Enemy::moveToCoordinate(float destX, float destY, Map* map) {
-    //ce je stopu, zdej nebo pa bo drugic
-    
-    if (stepped) {
-        stepped = !stepped;
-        return;
-    }
-
     float dx = destX - xpos;
     float dy = destY - ypos;
 

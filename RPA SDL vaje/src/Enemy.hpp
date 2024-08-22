@@ -40,4 +40,8 @@ public:
 	int getDmgValue() { return dmg; }
 
 	void moveToCoordinate(float, float, Map* map);
+
+	void takeDamage(int dmg) { hp -= dmg; }
+
+	bool isAlive() { return hp > 0; }
 };

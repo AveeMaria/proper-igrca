@@ -98,10 +98,9 @@ void Game::handleEvents() {
             if (event.button.button == SDL_BUTTON_LEFT) {
                 int mouseX, mouseY;
                 SDL_GetMouseState(&mouseX, &mouseY);
-                std::cout << "klik na: [" << mouseX << ", " << mouseY << "]\n";
-                Projectile* p = new Projectile(player->getX(), player->getY(), mouseX, mouseX);
+                //std::cout << "klik na: [" << mouseX << ", " << mouseY << "]\n";
+                Projectile* p = new Projectile(player->getX(), player->getY(), mouseX, mouseY);
                 projectiles.push_back(p);
-                //projman->spawnProjectile(player->getX(), player->getY(), mouseX, mouseX);
             }
             break;
 
@@ -109,7 +108,6 @@ void Game::handleEvents() {
             break;
         }
     }
-
 
     //joystick movement
     if (joystickmode) {
@@ -251,7 +249,6 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-
     if (inventory->showInventory()) {
         inventory->Update();
         return;
@@ -262,12 +259,31 @@ void Game::update() {
 
     player->Update();
    
+
     for (Projectile* p : projectiles) {
         p->moveToTarget(map);
+        p->Update();
+        
+        //prever usak bullet ce je zadeu enemyja
+        for (Enemy* e : enemies) {
+            if (p->rectCollision(e->getDestRect())) {
+                p->hitSomething();
+            }
+        }
     }
+
+    //std::cout << projectiles.size() << "\n";
+    for (auto it = projectiles.begin(); it != projectiles.end(); ++it) { //it je kot i v foorloopu, gre od zacetka do konca vektorja
+        Projectile* p = *it;
+
+        if (p->getHitSomething()) {
+            projectiles.erase(it);
+            break;
+        }
+    }
+
     
     for (Projectile* p : projectiles) {
-        p->Update();
     }
 
     if (!player->checkArmor()) {
